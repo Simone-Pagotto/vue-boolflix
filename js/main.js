@@ -35,10 +35,16 @@ Possiamo, cliccando il bottone, cercare sull’API tutti i film che contengono
                         params: {
 
                             'api_key': API_KEY,
-                            query: 'fight'
+                            query: this.searchInput
                         }
                     })
-                    .then(r => console.log(r))
+                    .then((result) =>{
+                        for(let i=0; i<result.data.results.length; i++){
+                            this.films.push(result.data.results[i]);
+                        }
+
+                        Promise.all(this.films);
+                    })
             }
         }
  })
