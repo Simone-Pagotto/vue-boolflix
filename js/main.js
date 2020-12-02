@@ -8,3 +8,37 @@ Possiamo, cliccando il bottone, cercare sull’API tutti i film che contengono
  Lingua 
  Voto 
  */
+
+ const myBoolflix = new Vue ({
+     el:'#root',
+     data:{
+        films:[],
+        searchInput:""
+     },
+     mounted(){
+         /* const API_KEY = 'aa4673a37382961cbea0f02136d42791';
+         axios
+            .get("https://api.themoviedb.org/3/search/movie",{
+                params: {
+                    
+                    'api_key': API_KEY,
+                    query: 'searchInput'
+                }
+            })
+            .then(r => console.log(r)) */
+        },
+        methods: {
+            filterFilms(){
+                const API_KEY = 'aa4673a37382961cbea0f02136d42791';
+                axios
+                    .get("https://api.themoviedb.org/3/search/movie", {
+                        params: {
+
+                            'api_key': API_KEY,
+                            query: 'fight'
+                        }
+                    })
+                    .then(r => console.log(r))
+            }
+        }
+ })
