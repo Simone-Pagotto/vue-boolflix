@@ -5,29 +5,50 @@
     box-sizing: border-box;
 }
 
+.inactive {
+    display: none;
+}
+
+.bg-dark{
+    background: rgb(46, 58, 70);
+}
+
+.bg-white{
+    background-color: white;
+}
+
 body {
     background: #1E2D3B;
     min-height: 100vh;
 }
 
 .container {
-    width: 1070px;
+    width: 1570px;
     height: 100%;
     margin: 0 auto;
 }
 
 .navbar{
     height: 70px;
+    padding: 0 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: antiquewhite;
+    background: rgb(46, 58, 70);
 }
 
 .navbar img {
-    width: 13%;
+    width: 11%;
 }
 
+.inputSearch{
+    border:none;
+}
+
+.bar-container {
+    display:flex;
+    padding: 10px;
+}
 .films-container {
     display: flex;
     justify-content: center;

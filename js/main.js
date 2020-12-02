@@ -13,7 +13,8 @@ Possiamo, cliccando il bottone, cercare sull’API tutti i film che contengono
      el:'#root',
      data:{
         films:[],
-        searchInput:""
+        searchInput:"",
+        isSearchActive: false
      },
      mounted(){
          /* const API_KEY = 'aa4673a37382961cbea0f02136d42791';
@@ -35,15 +36,17 @@ Possiamo, cliccando il bottone, cercare sull’API tutti i film che contengono
                         params: {
 
                             'api_key': API_KEY,
-                            query: this.searchInput
+                            query: this.searchInput,
+                            
                         }
                     })
                     .then((result) =>{
-                        for(let i=0; i<result.data.results.length; i++){
-                            this.films.push(result.data.results[i]);
-                        }
-
-                        Promise.all(this.films);
+                        console.log(result);
+                        //azzero l'array dei film: così sostituisco anzichè aggiungere 
+                        this.films.splice(0,this.films.length);
+                        let films = result.data.results;
+                        this.films.push(...films)
+                        
                     })
             }
         }
