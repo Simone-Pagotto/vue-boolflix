@@ -77,15 +77,22 @@ body {
 .film h3 {
     margin: 20px 0;
     color: white;
-    font-size: 22px;
+    font-size: 16px;
     text-transform: uppercase;
 }
 
-.film span.author {
+.film span.language {
     color: grey;
     font-size: 20px;
 }
 
-.film span.year {
+.film li.vote {
     color: grey;
+    list-style: none;
+}
+
+.film ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

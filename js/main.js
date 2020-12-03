@@ -48,6 +48,14 @@ Possiamo, cliccando il bottone, cercare sull’API tutti i film che contengono
                         this.films.push(...films)
                         
                     })
+            },
+            voteToStars: function(film){
+                let vote = Math.ceil(film.vote_average / 2);
+                return vote;
             }
+             
+        },
+        computed:{
+            
         }
  })

@@ -46,8 +46,13 @@
 					<div class="film" v-for="film in films">
 						<h3>Titolo:{{film.title}}</h3>
 						<h3>Titolo originale :{{ film.original_title}}</h3>
-						<span class="author">Lingua :{{ film.original_language}}</span>
-						<span class="year">Voto :{{film.vote_average}}</span>
+						<span class="language">Lingua :{{ film.original_language}}</span>
+						<ul>
+							<li v-for="(n,index) in 5" class="vote">
+								<i :class="voteToStars(film) <= index ? 'far' : 'fas'" class="fa-star"></i>
+							</li>
+						</ul>
+						
 					</div>
 				
 			</div>
