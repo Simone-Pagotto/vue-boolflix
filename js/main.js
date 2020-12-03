@@ -9,33 +9,31 @@ Possiamo, cliccando il bottone, cercare sull’API tutti i film che contengono
  Voto 
  */
 const languageFlags=["en","it","es"];
+const API_KEY = 'aa4673a37382961cbea0f02136d42791';
 
  const myBoolflix = new Vue ({
      el:'#root',
-     data:{
+     data:{       
         films:[],
-        /* tvSeries:[], */
+        imgConfig:'',
         searchInput:"",
         isSearchActive: false,
         languageFlags: [...languageFlags],
         nStarVote: 5
         
      },
-     mounted(){
-         /* const API_KEY = 'aa4673a37382961cbea0f02136d42791';
-         axios
-            .get("https://api.themoviedb.org/3/search/movie",{
-                params: {
-                    
-                    'api_key': API_KEY,
-                    query: 'searchInput'
-                }
-            })
-            .then(r => console.log(r)) */
-        },
+     mounted: function(){
+         axios.get('https://api.themoviedb.org/3/configuration',{
+             params: {
+                 'api_key': API_KEY
+             }
+         }).then(element => this.imgConfig = element.data.images)
+     },
+        
+        
         methods: {
             filterFilms(){
-                const API_KEY = 'aa4673a37382961cbea0f02136d42791';
+                
                 axios
                     .get("https://api.themoviedb.org/3/search/movie", {
                         params: {
@@ -46,6 +44,7 @@ const languageFlags=["en","it","es"];
                     .then((result) =>{
                         console.log(result);
                         //azzero l'array dei film: così sostituisco anzichè aggiungere 
+                        //TROVARE UNA POSIZIONE MIGLIORE PER QUEST'OPERAZIONE(MOUNTED??)
                         this.films.splice(0,this.films.length);
                         let films = result.data.results;
                         this.films.push(...films);  
@@ -74,6 +73,9 @@ const languageFlags=["en","it","es"];
             },
             showFlag: function(str){ 
                 return `img/flags/${str}.svg ` ;
+            },
+            showPoster: function(str){ 
+                return `${this.imgConfig.base_url}${this.imgConfig.poster_sizes[3]}${str} ` ; 
             },
             isFilm: function(film){
                 //Controllo se dentro all'oggetto film ci sono le proprietà caratteristiche di un film o di una serie tv
