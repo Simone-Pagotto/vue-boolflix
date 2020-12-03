@@ -8,13 +8,21 @@ Possiamo, cliccando il bottone, cercare sull’API tutti i film che contengono
  Lingua 
  Voto 
  */
+const languageFlags=[
+    {
+        'isoId': 'en',
+        'imageUrl': "'img/flags/england.svg'"
+    }
+]
 
  const myBoolflix = new Vue ({
      el:'#root',
      data:{
         films:[],
         searchInput:"",
-        isSearchActive: false
+        isSearchActive: false,
+        languageFlags: [...languageFlags]
+        
      },
      mounted(){
          /* const API_KEY = 'aa4673a37382961cbea0f02136d42791';
@@ -45,13 +53,32 @@ Possiamo, cliccando il bottone, cercare sull’API tutti i film che contengono
                         //azzero l'array dei film: così sostituisco anzichè aggiungere 
                         this.films.splice(0,this.films.length);
                         let films = result.data.results;
-                        this.films.push(...films)
+                        this.films.push(...films);
+                        
+                        
                         
                     })
             },
             voteToStars: function(film){
                 let vote = Math.ceil(film.vote_average / 2);
                 return vote;
+            },
+            findImg: function(film){
+
+                
+
+                console.log(film.original_language);
+                
+               
+                console.log(this.languageFlags[0].isoId,"<-------");
+
+                for(let i=0; i<=this.languageFlags.length; i++){
+                    if (film.original_langauge == this.languageFlags[i].isoId){
+                        console.log(this.languageFlags[i].imageUrl);
+                        return this.languageFlags[i].imageUrl;
+                    }
+
+                }
             }
              
         },
