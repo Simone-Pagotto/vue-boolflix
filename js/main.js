@@ -16,7 +16,8 @@ const languageFlags=["en","it","es"];
         films:[],
         searchInput:"",
         isSearchActive: false,
-        languageFlags: [...languageFlags]
+        languageFlags: [...languageFlags],
+        nStarVote: 5
         
      },
      mounted(){
@@ -56,9 +57,7 @@ const languageFlags=["en","it","es"];
                 let vote = Math.ceil(film.vote_average / 2);
                 return vote;
             },
-            showFlag: function(str){
-                console.log(str);
-                console.log(thi.languageFlags);
+            showFlag: function(str){ 
                 return `img/flags/${str}.svg ` ;
             }
              

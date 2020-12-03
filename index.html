@@ -46,12 +46,11 @@
 					<div class="film" v-for="film in films">
 						<h3>Titolo:{{film.title}}</h3>
 						<h3>Titolo originale :{{ film.original_title}}</h3>
-						<!-- <span class="language">Lingua :{{ film.original_language}}</span> -->
-						<img v-if="languageFlags.includes(film.original_languages)" 
-			
-							 :src="showFlag(film.original_languages)" alt=""></img>
+						<img v-if="languageFlags.includes(film.original_language)" 
+							 :src="showFlag(film.original_language)" alt="">
+						<img v-else :src="'img/flags/error.svg'" alt="ERROR">
 						<ul>
-							<li v-for="(n,index) in 5" class="vote">
+							<li v-for="(n,index) in nStarVote" class="vote">
 								<i :class="voteToStars(film) <= index ? 'far' : 'fas'" class="fa-star"></i>
 							</li>
 						</ul>
