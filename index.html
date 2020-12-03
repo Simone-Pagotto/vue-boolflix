@@ -44,7 +44,7 @@
 			<div class="films-container container">
 					<!-- film template -->
 					<div class="film" v-if="isFilm(film)" v-for="film in films">
-						<img src="imgConfig.base_url+imgConfig.poster_sizes[3]+film.poster_path" alt="">
+						<img :src="showPoster(film.poster_path)" alt="">
 						<h3>Titolo:{{film.title}}</h3>
 						<h3>Titolo originale :{{ film.original_title}}</h3>
 						<!-- generazione flag -->
@@ -61,7 +61,7 @@
 					</div>
 					<!-- serie tv template -->
 					<div class="film" v-else v-for="film in films">
-						<img src="imgConfig.base_url+imgConfig.poster_sizes[3]+film.poster_path" alt="">
+						<img :src="showPoster(film.poster_path)" alt="">
 						<h3>Titolo:{{film.name}}</h3>
 						<h3>Titolo originale :{{ film.original_name}}</h3>
 						<!-- generazione flag -->
