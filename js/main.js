@@ -14,6 +14,7 @@ const languageFlags=["en","it","es"];
      el:'#root',
      data:{
         films:[],
+        /* tvSeries:[], */
         searchInput:"",
         isSearchActive: false,
         languageFlags: [...languageFlags],
@@ -38,10 +39,8 @@ const languageFlags=["en","it","es"];
                 axios
                     .get("https://api.themoviedb.org/3/search/movie", {
                         params: {
-
                             'api_key': API_KEY,
                             query: this.searchInput,
-                            
                         }
                     })
                     .then((result) =>{
@@ -52,6 +51,22 @@ const languageFlags=["en","it","es"];
                         this.films.push(...films);  
                         
                     })
+                axios
+                    .get("https://api.themoviedb.org/3/search/tv", {
+                        params: {
+                            'api_key': API_KEY,
+                            query: this.searchInput,
+                        }
+                    })
+                    .then((result) =>{
+                        console.log(result);
+                        //azzero l'array dei film: così sostituisco anzichè aggiungere 
+                        
+                        let films = result.data.results;
+                        this.films.push(...films);  
+                        
+                    })
+
             },
             voteToStars: function(film){
                 let vote = Math.ceil(film.vote_average / 2);
@@ -59,6 +74,13 @@ const languageFlags=["en","it","es"];
             },
             showFlag: function(str){ 
                 return `img/flags/${str}.svg ` ;
+            },
+            isFilm: function(film){
+                //Controllo se dentro all'oggetto film ci sono le proprietà caratteristiche di un film o di una serie tv
+                // con il v-if poi reindirizzo ogni singolo oggetto al suo template
+                //In questo modo tengo tutti gli elementi in un unoc array
+                //Impostando dei filtri posso così mischiare gli elementi
+                return Object.getOwnPropertyNames(film).includes('title');
             }
              
         },

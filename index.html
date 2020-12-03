@@ -42,13 +42,31 @@
 				 
 			</div>
 			<div class="films-container container">
-				
-					<div class="film" v-for="film in films">
+					<!-- film template -->
+					<div class="film" v-if="isFilm(film)" v-for="film in films">
 						<h3>Titolo:{{film.title}}</h3>
 						<h3>Titolo originale :{{ film.original_title}}</h3>
+						<!-- generazione flag -->
 						<img v-if="languageFlags.includes(film.original_language)" 
 							 :src="showFlag(film.original_language)" alt="">
 						<img v-else :src="'img/flags/error.svg'" alt="ERROR">
+						<!-- voto con stelle -->
+						<ul>
+							<li v-for="(n,index) in nStarVote" class="vote">
+								<i :class="voteToStars(film) <= index ? 'far' : 'fas'" class="fa-star"></i>
+							</li>
+						</ul>
+						
+					</div>
+					<!-- serie tv template -->
+					<div class="film" v-else v-for="film in films">
+						<h3>Titolo:{{film.name}}</h3>
+						<h3>Titolo originale :{{ film.original_name}}</h3>
+						<!-- generazione flag -->
+						<img v-if="languageFlags.includes(film.original_language)" 
+							 :src="showFlag(film.original_language)" alt="">
+						<img v-else :src="'img/flags/error.svg'" alt="ERROR">
+						<!-- voto con stelle -->
 						<ul>
 							<li v-for="(n,index) in nStarVote" class="vote">
 								<i :class="voteToStars(film) <= index ? 'far' : 'fas'" class="fa-star"></i>
