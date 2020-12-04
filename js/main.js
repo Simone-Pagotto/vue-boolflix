@@ -1,13 +1,3 @@
-/* Milestone 1: Creare un layout base con una searchbar(una input e un button) 
-in cui possiamo scrivere completamente o parzialmente il nome di un film.
-Possiamo, cliccando il bottone, cercare sull’API tutti i film che contengono
- ciò che ha scritto l’utente.Vogliamo dopo la risposta dell’API visualizzare 
- a schermo i seguenti valori per ogni film trovato: 
- Titolo 
- Titolo Originale 
- Lingua 
- Voto 
- */
 const languageFlags=["en","it","es"];
 const API_KEY = 'aa4673a37382961cbea0f02136d42791';
 
@@ -33,7 +23,6 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
         
         methods: {
             filterFilms(){
-                
                 axios
                     .get("https://api.themoviedb.org/3/search/movie", {
                         params: {
@@ -46,8 +35,7 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
                         //TROVARE UNA POSIZIONE MIGLIORE PER QUEST'OPERAZIONE(MOUNTED??)
                         this.films.splice(0,this.films.length);
                         let films = result.data.results;
-                        this.films.push(...films);  
-                        
+                        this.films.push(...films); 
                     })
                 axios
                     .get("https://api.themoviedb.org/3/search/tv", {
@@ -63,7 +51,18 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
                         this.films.push(...films);  
                         
                     })
+                //ricerco il cast con un for loop, ricavo tutti gli id
+                for (let i = 0; i < this.films.length; i++){
+                    axios
+                        .get(`https://api.themoviedb.org/3/movie/${this.films[i].id}/credits`, {
+                            params: {
+                                'api_key': API_KEY,
+                            }
+                        }).then(result => this.films[i] = { ...this.films[i], cast: result.data.cast.splice(0, 5)}
+                            /* console.log(result.data.cast.splice(0, 5)) */)
 
+                }
+                    
             },
             voteToStars: function(film){
                 let vote = Math.ceil(film.vote_average / 2);
@@ -85,7 +84,7 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
             nullImg(e){
                 e.target.src = 'img/error-square.svg';
             },
-            getCast(number){
+            /* getCast(number){
                 axios
                     .get(`https://api.themoviedb.org/3/movie/${number}/credits`, {
                         params: {
@@ -94,7 +93,7 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
                     }).then(result => console.log(result.data.cast.splice(0,5)))
                 
                 return number
-            }
+            } */
             
              
         },

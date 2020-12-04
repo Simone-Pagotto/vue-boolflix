@@ -44,9 +44,9 @@
 				 
 			</div>
 			<div class="search-results">
-				<div class="cards-container container">
+				<div class="cards-container container" v-for="film in films">
 					<!-- film template -->
-					<div class="card" v-if="isFilm(film)" v-for="film in films">
+					<div class="card" v-if="isFilm(film)" >
 						<div class="poster">
 							<img v-on:error="nullImg" :src="showPoster(film.poster_path)" alt="">
 						</div>
@@ -56,7 +56,7 @@
 								<h3><strong>Titolo originale : </strong>{{film.original_title}}</h3>
 							</div>
 							<h3><strong>Trama : </strong>{{film.overview}}</h3>
-							<h3><strong>Cast : </strong>{{getCast(film.id)}}</h3>
+							<h3><strong>Cast : </strong>{{}}</h3>
 							<!-- generazione flag -->
 							<img v-if="languageFlags.includes(film.original_language)" :src="showFlag(film.original_language)" alt="">
 							<img v-else :src="'img/error-circle.svg'" alt="ERROR">
@@ -69,7 +69,7 @@
 						</div>
 					</div>
 					<!-- serie tv template -->
-					<div class="card" v-else v-for="film in films">
+					<div class="card" v-else >
 						<div class="poster">
 							<img v-on:error="nullImg" :src="showPoster(film.poster_path)" alt="">
 						</div>
@@ -80,7 +80,7 @@
 								<h3><strong>Titolo originale : </strong>{{film.original_name}}</h3>
 							</div>
 							<h3><strong>Trama : </strong>{{film.overview}}</h3>
-							<h3><strong>Cast : </strong>{{getCast(film.id)}}</h3>
+							<h3><strong>Cast : </strong>{{}}</h3>
 							<!-- generazione flag -->
 							<img v-if="languageFlags.includes(film.original_language)" :src="showFlag(film.original_language)" alt="">
 							<img v-else :src="'img/error-circle.svg'" alt="ERROR">
