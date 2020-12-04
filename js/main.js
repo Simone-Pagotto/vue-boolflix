@@ -42,7 +42,6 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
                         }
                     })
                     .then((result) =>{
-                        console.log(result);
                         //azzero l'array dei film: così sostituisco anzichè aggiungere 
                         //TROVARE UNA POSIZIONE MIGLIORE PER QUEST'OPERAZIONE(MOUNTED??)
                         this.films.splice(0,this.films.length);
@@ -58,7 +57,6 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
                         }
                     })
                     .then((result) =>{
-                        console.log(result);
                         //azzero l'array dei film: così sostituisco anzichè aggiungere 
                         
                         let films = result.data.results;
@@ -83,7 +81,21 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
                 //In questo modo tengo tutti gli elementi in un unoc array
                 //Impostando dei filtri posso così mischiare gli elementi
                 return Object.getOwnPropertyNames(film).includes('title');
+            },
+            nullImg(e){
+                e.target.src = 'img/error-square.svg';
+            },
+            getCast(number){
+                axios
+                    .get(`https://api.themoviedb.org/3/movie/${number}/credits`, {
+                        params: {
+                            'api_key': API_KEY,
+                        }
+                    }).then(result => console.log(result.data.cast.splice(0,5)))
+                
+                return number
             }
+            
              
         },
         computed:{

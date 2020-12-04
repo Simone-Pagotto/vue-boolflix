@@ -34,49 +34,65 @@
 				
 				<div class="bar-container " :class="isSearchActive ? 'bg-white' : 'bg-dark'">
 					<div @click="isSearchActive=!isSearchActive"><i class="fas fa-search"></i></div>
-					<input class="inputSearch" :class="isSearchActive ? null : 'inactive'" type="text" v-model="searchInput" v-on:keyup.enter="filterFilms">
+					<input class="inputSearch" :class="isSearchActive ? null : 'inactive'" 
+							type="text" v-model="searchInput" v-on:keyup.enter="filterFilms"
+							placeholder="Cerca Film e serie TV...">
 				</div>
 
 				<!-- <input class="inputSearch"  type="text" v-model="searchInput"
 					v-on:keyup.enter="filterFilms"> -->
 				 
 			</div>
-			<div class="films-container container">
+			<div class="search-results">
+				<div class="cards-container container">
 					<!-- film template -->
-					<div class="film" v-if="isFilm(film)" v-for="film in films">
-						<img :src="showPoster(film.poster_path)" alt="">
-						<h3>Titolo:{{film.title}}</h3>
-						<h3>Titolo originale :{{ film.original_title}}</h3>
-						<!-- generazione flag -->
-						<img v-if="languageFlags.includes(film.original_language)" 
-							 :src="showFlag(film.original_language)" alt="">
-						<img v-else :src="'img/flags/error.svg'" alt="ERROR">
-						<!-- voto con stelle -->
-						<ul>
-							<li v-for="(n,index) in nStarVote" class="vote">
-								<i :class="voteToStars(film) <= index ? 'far' : 'fas'" class="fa-star"></i>
-							</li>
-						</ul>
-						
+					<div class="card" v-if="isFilm(film)" v-for="film in films">
+						<div class="poster">
+							<img v-on:error="nullImg" :src="showPoster(film.poster_path)" alt="">
+						</div>
+						<div class="info">
+							<div class="titles">
+								<h3><strong>Titolo : </strong>{{film.title}}</h3>
+								<h3><strong>Titolo originale : </strong>{{film.original_title}}</h3>
+							</div>
+							<h3><strong>Trama : </strong>{{film.overview}}</h3>
+							<h3><strong>Cast : </strong>{{getCast(film.id)}}</h3>
+							<!-- generazione flag -->
+							<img v-if="languageFlags.includes(film.original_language)" :src="showFlag(film.original_language)" alt="">
+							<img v-else :src="'img/error-circle.svg'" alt="ERROR">
+							<!-- voto con stelle -->
+							<ul>
+								<li v-for="(n,index) in nStarVote" class="vote">
+									<i :class="voteToStars(film) <= index ? 'far' : 'fas'" class="fa-star"></i>
+								</li>
+							</ul>
+						</div>
 					</div>
 					<!-- serie tv template -->
-					<div class="film" v-else v-for="film in films">
-						<img :src="showPoster(film.poster_path)" alt="">
-						<h3>Titolo:{{film.name}}</h3>
-						<h3>Titolo originale :{{ film.original_name}}</h3>
-						<!-- generazione flag -->
-						<img v-if="languageFlags.includes(film.original_language)" 
-							 :src="showFlag(film.original_language)" alt="">
-						<img v-else :src="'img/flags/error.svg'" alt="ERROR">
-						<!-- voto con stelle -->
-						<ul>
-							<li v-for="(n,index) in nStarVote" class="vote">
-								<i :class="voteToStars(film) <= index ? 'far' : 'fas'" class="fa-star"></i>
-							</li>
-						</ul>
+					<div class="card" v-else v-for="film in films">
+						<div class="poster">
+							<img v-on:error="nullImg" :src="showPoster(film.poster_path)" alt="">
+						</div>
 						
+						<div class="info">
+							<div class="titles">
+								<h3><strong>Titolo : </strong>{{film.name}}</h3>
+								<h3><strong>Titolo originale : </strong>{{film.original_name}}</h3>
+							</div>
+							<h3><strong>Trama : </strong>{{film.overview}}</h3>
+							<h3><strong>Cast : </strong>{{getCast(film.id)}}</h3>
+							<!-- generazione flag -->
+							<img v-if="languageFlags.includes(film.original_language)" :src="showFlag(film.original_language)" alt="">
+							<img v-else :src="'img/error-circle.svg'" alt="ERROR">
+							<!-- voto con stelle -->
+							<ul>
+								<li v-for="(n,index) in nStarVote" class="vote">
+									<i :class="voteToStars(film) <= index ? 'far' : 'fas'" class="fa-star"></i>
+								</li>
+							</ul>
+						</div>	
 					</div>
-				
+			    </div>				
 			</div>
 		</div>
 		<!-- Custom JS -->

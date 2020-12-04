@@ -3,6 +3,7 @@
     padding: 0;
     font-family: 'Lato', sans-serif;
     box-sizing: border-box;
+    font-size: 16px;
 }
 
 .inactive {
@@ -10,15 +11,16 @@
 }
 
 .bg-dark{
-    background: rgb(46, 58, 70);
+    background: #0F0F0F;
 }
 
 .bg-white{
-    background-color: white;
+    background-color: #0F0F0F;
+    border: 1px solid white;
 }
 
 body {
-    background: #1E2D3B;
+    background: #141414;
     min-height: 100vh;
 }
 
@@ -34,7 +36,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgb(46, 58, 70);
+    background: #0F0F0F;
 }
 
 .navbar img {
@@ -43,55 +45,99 @@ body {
 
 .inputSearch{
     border:none;
+    background-color: #0F0F0F;
 }
 
 .bar-container {
     display:flex;
     padding: 10px;
+    
 }
-.films-container {
+
+.bar-container i{
+    color: white;
+}
+
+.cards-container {
+    width:100%;
+    height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
     padding: 100px 0;
 }
 
-.film {
+.card {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    flex-basis: 200px;
-    padding: 20px;
-    margin: 10px 20px;
-    height: 360px;
+    flex-basis: 342px;
+    margin: 10px;
+    height: 513px;
     background: rgb(46, 58, 70);
-    text-align: center;
+    /* text-align: center; */
+    position: relative;
 }
 
-.film img {
-    max-width: 100%;
+.card .poster{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
 }
 
-.film h3 {
-    margin: 20px 0;
+.card .info {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    visibility: hidden;
+    background-color: rgb(46, 58, 70);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+
+.card:hover .info{
+    visibility: visible;
+}
+
+.card .poster img {
+    width: 100%;
+    min-height: 100%;
+}
+
+.card .info img {
+    width: 10%;
+    align-self: center;
+}
+
+.card .info .titles {
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.card > .info  h3 {
+    
     color: white;
-    font-size: 16px;
-    text-transform: uppercase;
+    font-size: 1rem;
+    font-weight: 200;
+    align-self: flex-start;
 }
 
-.film span.language {
-    color: grey;
-    font-size: 20px;
-}
 
-.film li.vote {
+.card li.vote {
     color: grey;
     list-style: none;
 }
 
-.film ul {
+.card ul {
     display: flex;
     justify-content: center;
     align-items: center;
