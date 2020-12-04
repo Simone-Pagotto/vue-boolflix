@@ -23,45 +23,70 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
         
         methods: {
             filterFilms(){
-                axios
+                let moviePromise = axios
                     .get("https://api.themoviedb.org/3/search/movie", {
                         params: {
                             'api_key': API_KEY,
                             query: this.searchInput,
                         }
-                    })
+                    });
+               /* moviePromise
                     .then((result) =>{
                         //azzero l'array dei film: così sostituisco anzichè aggiungere 
                         //TROVARE UNA POSIZIONE MIGLIORE PER QUEST'OPERAZIONE(MOUNTED??)
                         this.films.splice(0,this.films.length);
                         let films = result.data.results;
                         this.films.push(...films); 
-                    })
-                axios
+                    }) */
+                let tvPromise = axios
                     .get("https://api.themoviedb.org/3/search/tv", {
                         params: {
                             'api_key': API_KEY,
                             query: this.searchInput,
                         }
-                    })
+                    });
+                /* tvPromise
                     .then((result) =>{
-                        //azzero l'array dei film: così sostituisco anzichè aggiungere 
-                        
                         let films = result.data.results;
-                        this.films.push(...films);  
+                        this.films.push(...films);             
+                    }); */
+                this.films.splice(0, this.films.length);
+                Promise.all([moviePromise, tvPromise])
+                        .then((result) => { 
+                            for(let i=0; i<result.length; i++){
+                                console.log(result[i].data.results);
+                                let films = result[i].data.results;
+                                this.films.push(...films); 
+                            }
+                            for (let i = 0; i < this.films.length; i++) {
+                                axios
+                                    .get(`https://api.themoviedb.org/3/movie/${this.films[i].id}/credits`, {
+                                        params: {
+                                            'api_key': API_KEY,
+                                        }
+                                    }).then(result => {console.log(result.data.cast)
+                                        this.$set(this.films[i], 'cast', result.data.cast.splice(0, 5))  
+                                    }
+                                        )
+                                    /* .catch((error) => console.error(error));*/
+                                /* this.$set(this.obj, 'cast', result.data.cast.splice(0, 5)) */
+                            }
+                        })  
                         
-                    })
+                        
                 //ricerco il cast con un for loop, ricavo tutti gli id
-                for (let i = 0; i < this.films.length; i++){
+                /* for (let i = 0; i < this.films.length; i++){
+                    console.log('ciao');
                     axios
                         .get(`https://api.themoviedb.org/3/movie/${this.films[i].id}/credits`, {
                             params: {
                                 'api_key': API_KEY,
                             }
-                        }).then(result => this.films[i] = { ...this.films[i], cast: result.data.cast.splice(0, 5)}
-                            /* console.log(result.data.cast.splice(0, 5)) */)
-
-                }
+                        }).then(result => console.log(result))
+                        .catch((error) => console.error(error)); 
+                            
+                    this.$set(this.obj, 'cast', result.data.cast.splice(0, 5)) 
+                } */
                     
             },
             voteToStars: function(film){
@@ -84,16 +109,15 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
             nullImg(e){
                 e.target.src = 'img/error-square.svg';
             },
-            /* getCast(number){
-                axios
-                    .get(`https://api.themoviedb.org/3/movie/${number}/credits`, {
-                        params: {
-                            'api_key': API_KEY,
-                        }
-                    }).then(result => console.log(result.data.cast.splice(0,5)))
-                
-                return number
-            } */
+            getCast(array){
+                let actors="";
+                for(let i=0; i<array.length; i++){
+                    actors+=',';
+                    actors+=array[i].name;
+                }
+                actors+=".";
+                return actors.substring(1);
+            }
             
              
         },
