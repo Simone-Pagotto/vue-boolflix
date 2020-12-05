@@ -57,7 +57,8 @@
 									<h3><strong>Titolo originale : </strong>{{film.original_title}}</h3>
 								</div>
 								<h3><strong>Trama : </strong>{{film.overview}}</h3>
-								<h3><strong>Cast : </strong><span v-for="(actor,index) in film.cast">{{actor.name}}{{getPunctuation(index)}}</span></h3>
+								<h3><strong>Cast : </strong><span v-for="(actor,index) in film.cast">{{actor.name}}{{index === (nActors-1) ? '.':', '}}</span></h3>
+								<h3><strong>Genre : </strong><span v-for="(genre,index) in film.genre_ids">{{showGenre(genre)}}{{index === (film.genre_ids.length-1)? '.':', ' }}</span></h3>
 								<!-- generazione flag -->
 								<img v-if="languageFlags.includes(film.original_language)" :src="showFlag(film.original_language)" alt="">
 								<img v-else :src="'img/error-circle.svg'" alt="ERROR">
@@ -81,7 +82,8 @@
 									<h3><strong>Titolo originale : </strong>{{film.original_name}}</h3>
 								</div>
 								<h3><strong>Trama : </strong>{{film.overview}}</h3>
-								<h3><strong>Cast : </strong><span v-for="(actor,index) in film.cast">{{actor.name}}{{getPunctuation(index)}}</span></h3>
+								<h3><strong>Cast : </strong><span v-for="(actor,index) in film.cast">{{actor.name}}{{index === (nActors-1) ? '.':', '}}</span></h3>
+								<h3><strong>Genre : </strong><span v-for="(genre,index) in film.genre_ids">{{showGenre(genre)}}{{index === (film.genre_ids.length-1)? '.':', ' }}</span></h3>
 								<!-- generazione flag -->
 								<img v-if="languageFlags.includes(film.original_language)" :src="showFlag(film.original_language)" alt="">
 								<img v-else :src="'img/error-circle.svg'" alt="ERROR">

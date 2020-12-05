@@ -46,6 +46,7 @@ body {
 .inputSearch{
     border:none;
     background-color: #0F0F0F;
+    color: white;
 }
 
 .bar-container {
