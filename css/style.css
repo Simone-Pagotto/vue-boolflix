@@ -19,6 +19,14 @@
     border: 1px solid white;
 }
 
+.grey{
+    color: grey;
+}
+
+.border-left{
+    border-left: 1px solid white;
+}
+
 body {
     background: #141414;
     min-height: 100vh;

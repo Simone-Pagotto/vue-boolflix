@@ -37,10 +37,10 @@
 					<div :class="isSearchActive ? null : 'inactive'" >
 						<input class="inputSearch" type="text" v-model="searchInput" v-on:keyup.enter="filterFilms"
 							placeholder="Cerca Film e serie TV...">
-						<select name="" id="">
-							<option value="">--- Seleziona un genere ---</option>
+						<select class="inputSearch" @change="filterFilmsByGenre" v-model="selectedGenre" name="genreList" id="genreList">
+							<option class="grey" value="" disabled selected hidden>--- Seleziona un genere ---</option>
 							<option value=""> </option>
-							<option v-for="genre in genres" value="">{{genre.name}}</option>
+							<option v-for="genre in genres" :value="genre.name">{{genre.name}}</option>
 						</select>
 					</div>
 					
@@ -48,7 +48,9 @@
 			</div>
 			<div class="search-results">
 				<div class="cards-container container" >
-					<div class="card" v-for="film in films">
+					<!-- !!!!!!!!!!!!!!! -->
+					<!-- UNFILTERED FILMS-->
+					<div class="card" v-if="selectedGenre.length === 0" v-for="film in films">
 						<!-- film template -->
 						<template v-if="isFilm(film)">
 							<div class="poster">
@@ -87,6 +89,66 @@
 								<h3><strong>Trama : </strong>{{film.overview}}</h3>
 								<h3><strong>Cast : </strong><span v-for="(actor,index) in film.cast">{{actor.name}}{{index === (nActors-1) ? '.':', '}}</span></h3>
 								<h3><strong>Genre : </strong><span v-for="(genre,index) in film.genre_ids">{{showGenre(genre)}}{{index === (film.genre_ids.length-1)? '.':', ' }}</span></h3>
+								<!-- generazione flag -->
+								<img v-if="languageFlags.includes(film.original_language)" :src="showFlag(film.original_language)" alt="">
+								<img v-else :src="'img/error-circle.svg'" alt="ERROR">
+								<!-- voto con stelle -->
+								<ul>
+									<li v-for="(n,index) in nStarVote" class="vote">
+										<i :class="voteToStars(film) <= index ? 'far' : 'fas'" class="fa-star"></i>
+									</li>
+								</ul>
+							</div>
+						</template>
+					</div>
+
+					<!-- !!!!!!!!!!!!!!!!!!!!!!! -->
+					<!-- FILTERED FILMS BY GENRE -->
+					<div class="card" v-if="selectedGenre.length !== 0" v-for="film in filteredFilms">
+						<!-- film template -->
+						<template v-if="isFilm(film)">
+							<div class="poster">
+								<img v-on:error="nullImg" :src="showPoster(film.poster_path)" alt="">
+							</div>
+							<div class="info">
+								<div class="titles">
+									<h3><strong>Titolo : </strong>{{film.title}}</h3>
+									<h3><strong>Titolo originale : </strong>{{film.original_title}}</h3>
+								</div>
+								<h3><strong>Trama : </strong>{{film.overview}}</h3>
+								<h3><strong>Cast : </strong><span
+										v-for="(actor,index) in film.cast">{{actor.name}}{{index === (nActors-1) ? '.':', '}}</span></h3>
+								<h3><strong>Genre : </strong><span
+										v-for="(genre,index) in film.genre_ids">{{showGenre(genre)}}{{index === (film.genre_ids.length-1)? '.':', ' }}</span>
+								</h3>
+								<!-- generazione flag -->
+								<img v-if="languageFlags.includes(film.original_language)" :src="showFlag(film.original_language)" alt="">
+								<img v-else :src="'img/error-circle.svg'" alt="ERROR">
+								<!-- voto con stelle -->
+								<ul>
+									<li v-for="(n,index) in nStarVote" class="vote">
+										<i :class="voteToStars(film) <= index ? 'far' : 'fas'" class="fa-star"></i>
+									</li>
+								</ul>
+							</div>
+						</template>
+						<!-- serie tv template -->
+						<template v-else>
+							<div class="poster">
+								<img v-on:error="nullImg" :src="showPoster(film.poster_path)" alt="">
+							</div>
+					
+							<div class="info">
+								<div class="titles">
+									<h3><strong>Titolo : </strong>{{film.name}}</h3>
+									<h3><strong>Titolo originale : </strong>{{film.original_name}}</h3>
+								</div>
+								<h3><strong>Trama : </strong>{{film.overview}}</h3>
+								<h3><strong>Cast : </strong><span
+										v-for="(actor,index) in film.cast">{{actor.name}}{{index === (nActors-1) ? '.':', '}}</span></h3>
+								<h3><strong>Genre : </strong><span
+										v-for="(genre,index) in film.genre_ids">{{showGenre(genre)}}{{index === (film.genre_ids.length-1)? '.':', ' }}</span>
+								</h3>
 								<!-- generazione flag -->
 								<img v-if="languageFlags.includes(film.original_language)" :src="showFlag(film.original_language)" alt="">
 								<img v-else :src="'img/error-circle.svg'" alt="ERROR">

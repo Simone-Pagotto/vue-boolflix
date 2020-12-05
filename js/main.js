@@ -11,7 +11,9 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
            isSearchActive: false,
            languageFlags: [...languageFlags],
            nStarVote: 5,
-           nActors: 5
+           nActors: 5,
+           selectedGenre: "",
+           filteredFilms:[]
 
         },
         mounted: function(){
@@ -109,6 +111,19 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
             },
             nullImg(e){
                 e.target.src = 'img/error-square.svg';
+            },
+            filterFilmsByGenre() {
+                for(let i=0; i<this.genres.length; i++){
+                    if(this.selectedGenre=== this.genres[i].name){
+                        let selectedGenresId = this.genres[i].id;
+                        console.log(selectedGenresId);
+                        this.filteredFilms = this.films.filter((film) =>
+                            film.genre_ids.includes(selectedGenresId))
+                    }
+                }
+                
+                 
+                
             },
             
             
