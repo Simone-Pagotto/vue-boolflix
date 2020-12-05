@@ -54,7 +54,7 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
                 Promise.all([moviePromise, tvPromise])
                         .then((result) => { 
                             for(let i=0; i<result.length; i++){
-                                console.log(result[i].data.results);
+                                
                                 let films = result[i].data.results;
                                 this.films.push(...films); 
                             }
@@ -64,7 +64,7 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
                                         params: {
                                             'api_key': API_KEY,
                                         }
-                                    }).then(result => {console.log(result.data.cast)
+                                    }).then(result => {
                                         this.$set(this.films[i], 'cast', result.data.cast.splice(0, 5))  
                                     }
                                         )
@@ -109,14 +109,12 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
             nullImg(e){
                 e.target.src = 'img/error-square.svg';
             },
-            getCast(array){
-                let actors="";
-                for(let i=0; i<array.length; i++){
-                    actors+=',';
-                    actors+=array[i].name;
+            getPunctuation(index) {
+                if(index===4){
+                    return ".";
+                } else {
+                    return ",";
                 }
-                actors+=".";
-                return actors.substring(1);
             }
             
              
