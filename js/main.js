@@ -26,6 +26,19 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
                     'api_key': API_KEY
                 }
             }).then(element => this.genres = element.data.genres);
+
+            axios.get('https://api.themoviedb.org/3/genre/tv/list',{
+                params: {
+                    'api_key': API_KEY
+                }
+            }).then(element => {
+                let transArray = [...this.genres,...element.data.genres]; 
+                //rimuove i doppioni degli oggetti in genres
+                this.genres = Array.from(new Set(transArray.map(a => a.id)))
+                    .map(id => {
+                        return transArray.find(a => a.id === id)
+                    })    
+            });
         },
         methods: {
             filterFilms(){

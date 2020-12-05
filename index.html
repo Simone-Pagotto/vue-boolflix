@@ -34,14 +34,17 @@
 				
 				<div class="bar-container " :class="isSearchActive ? 'bg-white' : 'bg-dark'">
 					<div @click="isSearchActive=!isSearchActive"><i class="fas fa-search"></i></div>
-					<input class="inputSearch" :class="isSearchActive ? null : 'inactive'" 
-							type="text" v-model="searchInput" v-on:keyup.enter="filterFilms"
+					<div :class="isSearchActive ? null : 'inactive'" >
+						<input class="inputSearch" type="text" v-model="searchInput" v-on:keyup.enter="filterFilms"
 							placeholder="Cerca Film e serie TV...">
-				</div>
-
-				<!-- <input class="inputSearch"  type="text" v-model="searchInput"
-					v-on:keyup.enter="filterFilms"> -->
-				 
+						<select name="" id="">
+							<option value="">--- Seleziona un genere ---</option>
+							<option value=""> </option>
+							<option v-for="genre in genres" value="">{{genre.name}}</option>
+						</select>
+					</div>
+					
+				</div>				 
 			</div>
 			<div class="search-results">
 				<div class="cards-container container" >
