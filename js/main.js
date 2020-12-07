@@ -13,7 +13,9 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
            nStarVote: 5,
            nActors: 5,
            selectedGenre: "",
-           filteredFilms:[]
+           filteredFilms:[],
+           jumboFilm:'',
+           topRatedFilms:[]
 
         },
         mounted: function(){
@@ -41,6 +43,20 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
                         return transArray.find(a => a.id === id)
                     })    
             });
+
+            
+            axios
+                .get("https://api.themoviedb.org/3/trending/movie/day", {
+                    params: {
+                        'api_key': API_KEY,
+                        page : getRandomIntInclusive(0,10)
+                    }
+                }).then(result => {
+                    this.jumboFilm = result.data.results[getRandomIntInclusive(0,19)];
+                    this.topRatedFilms = result.data.results;
+                    });
+            
+
         },
         methods: {
             filterFilms(){
@@ -88,6 +104,9 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
             },
             showPoster: function(str){ 
                 return `${this.imgConfig.base_url}${this.imgConfig.poster_sizes[3]}${str} ` ; 
+            },
+            showJumbo: function(str){ 
+                return `${this.imgConfig.base_url}${this.imgConfig.backdrop_sizes[2]}${str} ` ; 
             },
             showGenre: function(arr){
                 let isNotInList = 0;

@@ -46,7 +46,25 @@
 					
 				</div>				 
 			</div>
-			<div class="search-results">
+			<div v-if="searchInput.length === 0" class="showcase">
+				<div class="jumbotron">
+					<img :src="showJumbo(jumboFilm.poster_path)" alt="">
+					
+				</div>
+				<div class="top-rated">
+					<ul class="flex">
+						<li v-for="film in topRatedFilms">
+							<img :src="showPoster(film.poster_path)" alt="">
+						</li>
+					</ul>
+
+				</div>
+				<div class="genre-list">
+
+				</div>
+
+			</div>
+			<div v-if="searchInput.length !== 0" class="search-results">
 				<div class="cards-container container" >
 					<!-- !!!!!!!!!!!!!!! -->
 					<!-- UNFILTERED FILMS-->
