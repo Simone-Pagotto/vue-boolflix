@@ -15,7 +15,8 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
            selectedGenre: "",
            filteredFilms:[],
            jumboFilm:'',
-           topRatedFilms:[]
+           topRatedFilms:[],
+           scrollPosition: 0
 
         },
         mounted: function(){
@@ -142,12 +143,23 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
                 }   
             },
             rightScroll() {
-                const box = document.getElementsByClassName("top-rated-container");
-                console.log(box);
-                box.scrollLeft += 50;
-            }
-            
-            
-             
+                this.scrollPosition = $(".top-rated-container").scrollLeft();
+                this.scrollPosition = this.scrollPosition + 1000;
+                $(".top-rated-container").animate({scrollLeft: this.scrollPosition});
+                console.log(this.scrollPosition,"add");
+                const jjj = $(".top-rated-container");
+                console.log(jjj.scrollWidth ,"scrollwidth");
+            },
+            leftScroll() {
+                this.scrollPosition = $(".top-rated-container").scrollLeft();
+                this.scrollPosition = this.scrollPosition - 1000;
+                $(".top-rated-container").animate({ scrollLeft: this.scrollPosition });
+                console.log(this.scrollPosition, "add");
+            },
+            maxScroll(){
+                let maxWidth = $(".top-rated-container").scrollWidth - $(".top-rated-container").clientWidth;
+                console.log(maxWidth);
+                return maxWidth;
+            }  
         },
  })
