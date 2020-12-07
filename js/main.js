@@ -16,7 +16,9 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
            filteredFilms:[],
            jumboFilm:'',
            topRatedFilms:[],
-           scrollPosition: 0
+           scrollPosition: 0,
+           maxScroll: 0
+           
 
         },
         mounted: function(){
@@ -143,23 +145,35 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
                 }   
             },
             rightScroll() {
+                //scroll via bottone
                 this.scrollPosition = $(".top-rated-container").scrollLeft();
                 this.scrollPosition = this.scrollPosition + 1000;
                 $(".top-rated-container").animate({scrollLeft: this.scrollPosition});
-                console.log(this.scrollPosition,"add");
-                const jjj = $(".top-rated-container");
-                console.log(jjj.scrollWidth ,"scrollwidth");
-            },
+                
+                //hide del bottone rightScroll al suo estremo
+                let a = $(".top-rated-container").get(0).scrollWidth;
+                let b = $(".top-rated-container").get(0).clientWidth;
+
+                if (this.scrollPosition > (a - b)) {
+                    this.maxScroll = (a - b);//modifico elemento che innesca la condizione
+                }
+                
+            },      
             leftScroll() {
+                //scroll via bottone
                 this.scrollPosition = $(".top-rated-container").scrollLeft();
                 this.scrollPosition = this.scrollPosition - 1000;
                 $(".top-rated-container").animate({ scrollLeft: this.scrollPosition });
-                console.log(this.scrollPosition, "add");
+
+                //reset dell hide del bottone rightScroll
+                let a = $(".top-rated-container").get(0).scrollWidth;
+                let b = $(".top-rated-container").get(0).clientWidth;
+
+                if (this.scrollPosition < (a - b)) {
+                    this.maxScroll = 0;//modifico elemento che innesca la condizione
+                }
             },
-            maxScroll(){
-                let maxWidth = $(".top-rated-container").scrollWidth - $(".top-rated-container").clientWidth;
-                console.log(maxWidth);
-                return maxWidth;
-            }  
+            
         },
+        
  })

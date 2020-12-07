@@ -62,9 +62,11 @@
 					<div class="chevron-left" @click="leftScroll" v-if="scrollPosition > 0">
 						<i class="fas fa-2x fa-chevron-left"></i>
 					</div>
-					<div class="chevron-right" @click="rightScroll" >
-						<i class="fas fa-2x fa-chevron-right"></i>
-					</div>
+					<template v-if="maxScroll===0">
+						<div class="chevron-right" @click="rightScroll">
+							<i class="fas fa-2x fa-chevron-right"></i>
+						</div>
+					</template>	
 
 				</div>
 				<div class="genre-list">
