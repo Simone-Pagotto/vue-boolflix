@@ -52,11 +52,17 @@
 					
 				</div>
 				<div class="top-rated">
-					<ul class="flex">
+					<ul class="top-rated-container">
 						<li v-for="film in topRatedFilms">
 							<img :src="showPoster(film.poster_path)" alt="">
 						</li>
 					</ul>
+					<div class="chevron-left">
+						<i class="fas fa-2x fa-chevron-left"></i>
+					</div>
+					<div class="chevron-right" @click="rightScroll">
+						<i class="fas fa-2x fa-chevron-right"></i>
+					</div>
 
 				</div>
 				<div class="genre-list">

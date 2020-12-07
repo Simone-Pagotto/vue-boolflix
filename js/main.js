@@ -139,11 +139,13 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
                         this.filteredFilms = this.films.filter((film) =>
                             film.genre_ids.includes(selectedGenresId))
                     }
-                }
-                
-                 
-                
+                }   
             },
+            rightScroll() {
+                const box = document.getElementsByClassName("top-rated-container");
+                console.log(box);
+                box.scrollLeft += 50;
+            }
             
             
              
