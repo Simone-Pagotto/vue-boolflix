@@ -17,7 +17,10 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
            jumboFilm:'',
            topRatedFilms:[],
            scrollPosition: 0,
-           maxScroll: 0
+           maxScroll: 0,
+           lines: 0,
+           clientWidth: 0,
+           currentLine: 1
            
 
         },
@@ -157,6 +160,8 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
                 if (this.scrollPosition > (a - b)) {
                     this.maxScroll = (a - b);//modifico elemento che innesca la condizione
                 }
+
+                this.currentLine++;
                 
             },      
             leftScroll() {
@@ -172,7 +177,19 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
                 if (this.scrollPosition < (a - b)) {
                     this.maxScroll = 0;//modifico elemento che innesca la condizione
                 }
+
+                this.currentLine--;
             },
+            calcMap(){
+                let map = $('.top-rated .map');
+                map.css("opacity", "1");
+                let a = $(".top-rated-container").get(0).scrollWidth;
+                this.lines = Math.floor(a/1000);
+            },
+            hideMap(){
+                let map = $('.top-rated .map');
+                map.css("opacity","0");
+            }
             
         },
         

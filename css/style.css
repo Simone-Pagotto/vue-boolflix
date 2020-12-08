@@ -30,7 +30,7 @@
 }
 
 .bold-white {
-    font-weight: 4s00;
+    font-weight: 400;
     color: white;
     font-size: 1rem;
     text-overflow: ellipsis;
@@ -178,6 +178,30 @@ body {
     transform: translate(10%, -100%);
 }
 
+.top-rated .map{
+    width: 10vw;
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-25%, -150%);
+}
+
+.top-rated .map .line-style {
+    
+    /* background-color: aqua; */
+    height: 3px;
+    width: 100%;
+    margin: 1px;
+}
+
+.operating{
+    background-color:#AAAAAA;
+}
+
+.idle{
+    background-color: #4D4D4D ;
+}
 
 .chevron-left {
     position: absolute;
