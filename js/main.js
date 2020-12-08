@@ -21,7 +21,12 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
            lines: 0,
            scrollWidth: 0,
            clientWidth: 0,
-           currentLine: 1
+           currentLine: 1,
+           selectedGenres:[
+               { "id": 28, "name": "Action" },
+               { "id": 12, "name": "Adventure" },
+               { "id": 16, "name": "Animation" }
+           ]
            
 
         },
@@ -48,22 +53,36 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
                 this.genres = Array.from(new Set(transArray.map(a => a.id)))
                     .map(id => {
                         return transArray.find(a => a.id === id)
-                    })    
+                    }) 
+                /* this.selectedGenres = [...this.genres];
+                for(let i=0; i< this.genres.length - 1 ; i++){
+                    this.selectedGenres.splice(getRandomIntInclusive(0,this.selectedGenres.length),1)
+                } */
             });
 
-            
             axios
                 .get("https://api.themoviedb.org/3/trending/movie/day", {
                     params: {
                         'api_key': API_KEY,
-                        page : getRandomIntInclusive(0,10)
+                        page: 1
                     }
                 }).then(result => {
-                    this.jumboFilm = result.data.results[getRandomIntInclusive(0,19)];
-                    this.topRatedFilms = result.data.results;
-                    });
-            
+                    this.jumboFilm = result.data.results[getRandomIntInclusive(0, result.data.results.length)];
+                    
+                });
 
+            for(let i=1; i<=25; i++){
+                axios
+                    .get("https://api.themoviedb.org/3/trending/movie/day", {
+                        params: {
+                            'api_key': API_KEY,
+                            page: i
+                        }
+                    }).then(result => {
+                        this.topRatedFilms = [...this.topRatedFilms,...result.data.results];
+                    });
+            }
+            
         },
         methods: {
             filterFilms(){
@@ -112,6 +131,9 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
             showPoster: function(str){ 
                 return `${this.imgConfig.base_url}${this.imgConfig.poster_sizes[3]}${str} ` ; 
             },
+            showLogo: function(str){ 
+                return `${this.imgConfig.base_url}${this.imgConfig.logo_sizes[2]}${str} ` ; 
+            },
             showJumbo: function(str){ 
                 return `${this.imgConfig.base_url}${this.imgConfig.backdrop_sizes[2]}${str} ` ; 
             },
@@ -141,12 +163,16 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
             filterFilmsByGenre() {
                 for(let i=0; i<this.genres.length; i++){
                     if(this.selectedGenre=== this.genres[i].name){
-                        let selectedGenresId = this.genres[i].id;
-                        console.log(selectedGenresId);
+                        let selectedId = this.genres[i].id;
+                        console.log(selectedId);
                         this.filteredFilms = this.films.filter((film) =>
-                            film.genre_ids.includes(selectedGenresId))
+                            film.genre_ids.includes(selectedId))
                     }
                 }   
+            },
+            filteredTopRatedFilms(obj){
+                return this.topRatedFilms.filter((film) =>
+                film.genre_ids.includes(obj.id))
             },
             rightScroll() {
                 //scroll via bottone
@@ -191,7 +217,11 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
             hideMap(){
                 let map = $('.top-rated .map');
                 map.css("opacity","0");
+            },
+            listRightScroll(ev){
+                console.log(ev.target);
             }
+
             
         },
         

@@ -84,6 +84,18 @@
 
 				</div>
 				<div class="genre-list">
+					<ul class="carousel-list">
+						<li v-for="n in selectedGenres">
+							<h2 class="middle-bold-white">{{n.name}}</h2>
+							<div class="carousel">
+								<ul>
+									<li v-for="film in topRatedFilms">
+										<img :src="showLogo(film.poster_path)" alt="">
+									</li>
+								</ul>
+							</div>
+						</li>
+					</ul>
 
 				</div>
 

@@ -25,6 +25,12 @@
     font-size: 3rem;
 }
 
+.middle-bold-white {
+    font-weight: 600;
+    color: white;
+    font-size: 2rem;
+}
+
 .jumbo-info .big-bold-white{
      text-transform: uppercase ;
 }
@@ -212,6 +218,51 @@ body {
     position: absolute;
     top: 0;
     right: 0;
+}
+
+.genre-list {
+    padding : 0 5vw;
+}
+
+.genre-list ul {
+    list-style: none;
+}
+
+.genre-list .carousel-list li {
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    margin: 50px 0;
+}
+
+.genre-list .carousel {
+    width: 100%;
+    height: 200px;
+    border: 1px solid coral;
+    
+}
+
+.genre-list .carousel ul {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow-y: hidden;
+    overflow-x: scroll;
+}
+
+[class*="chev-"]{
+    height: 100%;
+    width: 50px;
+    opacity: 0;
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.2s ease-in;
+}
+
+.carousel:hover [class*="chev-"]{
+    opacity: 0.7;
 }
 
 .cards-container {
