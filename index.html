@@ -50,6 +50,14 @@
 			</div>
 			<div v-if="searchInput.length === 0" class="showcase">
 				<div class="jumbotron">
+					<div class="jumbo-info">
+						<h1 class="big-bold-white">{{jumboFilm.original_title}}</h1>
+						<h4 class="bold-white">{{jumboFilm.overview}}</h4>
+						<div class="button-container">
+							<button class="play"><i class="fas fa-sm fa-play"></i> Riproduci</button>
+							<button class="more-info"><i class="fas fa-sm fa-info-circle"></i> Altre info</button>
+						</div>
+					</div>
 					<img :src="showJumbo(jumboFilm.poster_path)" alt="">
 					
 				</div>
@@ -67,6 +75,7 @@
 							<i class="fas fa-2x fa-chevron-right"></i>
 						</div>
 					</template>	
+					<h2 class="title big-bold-white">Top rated Films</h2>
 
 				</div>
 				<div class="genre-list">

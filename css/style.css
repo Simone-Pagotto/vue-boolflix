@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Lato', sans-serif;
+    font-family: sans-serif;
     box-sizing: border-box;
     font-size: 16px;
 }
@@ -17,6 +17,23 @@
 .bg-white{
     background-color: #0F0F0F;
     border: 1px solid white;
+}
+
+.big-bold-white {
+    font-weight: 600;
+    color: white;
+    font-size: 3rem;
+}
+
+.jumbo-info .big-bold-white{
+     text-transform: uppercase ;
+}
+
+.bold-white {
+    font-weight: 4s00;
+    color: white;
+    font-size: 1rem;
+    text-overflow: ellipsis;
 }
 
 .grey{
@@ -70,10 +87,49 @@ body {
 
 .jumbotron {
     height: 800px;
+    padding: 0 10vw;
+    display: flex;
+    justify-content: center;
+    background-color: #0F0F0F;
 }
 
 .jumbotron img {
     height: 100%;
+}
+
+.jumbo-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 10vw 10vw 10vw 0;
+}
+
+.button-container button {
+    padding : 20px 50px;
+    font-size: 1.6rem;
+    font-weight: 400 ;
+    border-radius: 10px;
+    margin: 0 20px;
+    border: none;
+}
+
+.button-container .play {
+    background-color: white;
+    color: black ;
+}
+
+.button-container .play:hover {
+    background-color: #C0C0C0 ;
+}
+
+.button-container .more-info {
+   background-color:  #686868;
+   opacity: 1;
+   color: white;
+}
+
+.button-container .more-info:hover {
+    opacity: 0.5;
 }
 
 .top-rated {
@@ -115,6 +171,12 @@ body {
     opacity: 0.7;
 }
 
+.top-rated .title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(10%, -100%);
+}
 
 
 .chevron-left {
