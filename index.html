@@ -89,10 +89,19 @@
 							<h2 class="middle-bold-white">{{n.name}}</h2>
 							<div class="carousel">
 								<ul>
-									<li v-for="film in topRatedFilms">
+									<li v-for="film in filteredTopRatedFilms(n)">
 										<img :src="showLogo(film.poster_path)" alt="">
 									</li>
 								</ul>
+								
+								<div class="chevron-right" @click="listRightScroll">
+									<i class="fas fa-2x fa-chevron-right"></i>
+								</div>
+								
+								
+								<div class="chevron-left" @click="listLeftScroll">
+									<i class="fas fa-2x fa-chevron-left"></i>
+								</div>
 							</div>
 						</li>
 					</ul>

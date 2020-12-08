@@ -26,7 +26,8 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
                { "id": 28, "name": "Action" },
                { "id": 12, "name": "Adventure" },
                { "id": 16, "name": "Animation" }
-           ]
+           ],
+            nTopRatedFilmsPages: 10
            
 
         },
@@ -71,7 +72,7 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
                     
                 });
 
-            for(let i=1; i<=25; i++){
+            for(let i=1; i<=this.nTopRatedFilmsPages; i++){
                 axios
                     .get("https://api.themoviedb.org/3/trending/movie/day", {
                         params: {
@@ -202,9 +203,9 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
                 let a = $(".top-rated-container").get(0).scrollWidth;
                 let b = $(".top-rated-container").get(0).clientWidth;
 
-                if (this.scrollPosition < (a - b)) {
+                /* if (this.scrollPosition < (a - b)) {
                     this.maxScroll = 0;//modifico elemento che innesca la condizione
-                }
+                } */
 
                 this.currentLine--;
             },
@@ -219,7 +220,18 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
                 map.css("opacity","0");
             },
             listRightScroll(ev){
-                console.log(ev.target);
+                console.log($(ev.target).parent().parent().children('ul'));
+                let currentList = $(ev.target).parent().parent().children('ul');
+                let listScrollPosition = currentList.scrollLeft();
+                listScrollPosition = listScrollPosition +1000;
+                currentList.animate({ scrollLeft: listScrollPosition });
+            },
+            listLeftScroll(ev){
+                console.log($(ev.target).parent().parent().children('ul'));
+                let currentList = $(ev.target).parent().parent().children('ul');
+                let listScrollPosition = currentList.scrollLeft();
+                listScrollPosition = listScrollPosition -1000;
+                currentList.animate({ scrollLeft: listScrollPosition });
             }
 
             
