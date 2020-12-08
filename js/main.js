@@ -24,8 +24,10 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
            currentLine: 1,
            selectedGenres:[
                { "id": 28, "name": "Action" },
-               { "id": 12, "name": "Adventure" },
-               { "id": 16, "name": "Animation" }
+               { "id": 16, "name": "Animation" },
+               { "id": 80, "name": "Crime" },
+               { "id": 18, "name": "Drama" },
+               { "id": 14, "name": "Fantasy" },
            ],
             nTopRatedFilmsPages: 10
            
@@ -55,7 +57,7 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
                     .map(id => {
                         return transArray.find(a => a.id === id)
                     }) 
-                /* this.selectedGenres = [...this.genres];
+               /*  this.selectedGenres = [...this.genres];
                 for(let i=0; i< this.genres.length - 1 ; i++){
                     this.selectedGenres.splice(getRandomIntInclusive(0,this.selectedGenres.length),1)
                 } */
