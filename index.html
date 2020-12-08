@@ -70,7 +70,8 @@
 					<div class="chevron-left" @click="leftScroll" v-if="scrollPosition > 0">
 						<i class="fas fa-2x fa-chevron-left"></i>
 					</div>
-					<template v-if="maxScroll===0">
+					<!-- <template v-if="maxScroll===0"> -->
+					<template v-if="scrollPosition <= (scrollWidth - clientWidth)">	
 						<div class="chevron-right" @click="rightScroll">
 							<i class="fas fa-2x fa-chevron-right"></i>
 						</div>
@@ -78,7 +79,7 @@
 					<h2 class="title big-bold-white">Top rated Films</h2>
 					<div class="map">
 						<div class="line-style" v-for="line in lines" 
-							 :class="line === currentLine ? 'operating' : 'idle'">{{n}}</div>
+							 :class="line === currentLine ? 'operating' : 'idle'"></div>
 					</div>
 
 				</div>

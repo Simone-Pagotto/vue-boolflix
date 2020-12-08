@@ -19,6 +19,7 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
            scrollPosition: 0,
            maxScroll: 0,
            lines: 0,
+           scrollWidth: 0,
            clientWidth: 0,
            currentLine: 1
            
@@ -156,10 +157,11 @@ const API_KEY = 'aa4673a37382961cbea0f02136d42791';
                 //hide del bottone rightScroll al suo estremo
                 let a = $(".top-rated-container").get(0).scrollWidth;
                 let b = $(".top-rated-container").get(0).clientWidth;
-
-                if (this.scrollPosition > (a - b)) {
+                this.scrollWidth = a;
+                this.clientWidth = b;
+                /* if (this.scrollPosition > (a - b)) {
                     this.maxScroll = (a - b);//modifico elemento che innesca la condizione
-                }
+                } */
 
                 this.currentLine++;
                 
