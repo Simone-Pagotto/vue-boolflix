@@ -145,7 +145,7 @@ body {
 
 .top-rated-container{
     display: flex;
-    overflow-x: scroll;
+    overflow: hidden;
     height: 100%;
 }
 
@@ -246,7 +246,7 @@ body {
     height: 100%;
     display: flex;
     overflow-y: hidden;
-    overflow-x: scroll;
+    overflow-x: hidden;
 }
 
 .genre-list .carousel ul::-webkit-scrollbar {
